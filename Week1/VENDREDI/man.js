@@ -269,3 +269,49 @@ function getStats() {
     }
 }
 
+function filterCataloge(request) {
+
+    let list = [...annonces];
+
+    if (request.filter) {
+        list = list.filter(a => {
+            return a.titre.includes(request.filter) || a.description.includes(request.filter)
+        })
+    }
+
+
+    if (request.categorie) {
+        list = list.filter(a => {
+            return a.categorie == request.categorie
+        })
+    }
+
+    if (request.prix) {
+        if (request.prix.max) {
+            list = list.filter(a => {
+                return a.prix <= request.prix.max
+            })
+        }
+        if (request.prix.min) {
+            list = list.filter(a => {
+                return a.prix >= request.prix.min
+            })
+        }
+    }
+
+
+    if (request.etat) {
+        list = list.filter(a => {
+            return a.etat == request.etat
+        })
+    }
+
+
+    console.log("========Catalogue========")
+    list.forEach(a=>{
+        console.log(a)
+        console.log('----------------------')
+    })
+    
+
+}
